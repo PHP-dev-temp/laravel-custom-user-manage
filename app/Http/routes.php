@@ -13,4 +13,14 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+Route::get('/register', [
+   'uses' => 'UserController@registerUser',
+    'as' => 'register'
+]);
+
+Route::post('/register/user', [
+    'uses' => 'UserController@registerUserStore',
+    'as' => 'register.user'
+]);
