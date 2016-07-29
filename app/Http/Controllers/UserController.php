@@ -49,8 +49,7 @@ class UserController extends Controller
                 $user->active_hash = null;
                 $user->update();
                 Auth::login($user);
-                // TODO return user edit page
-                return redirect()->route('home');
+                return redirect()->route('user.edit');
             }
         }
         $messages = array(
@@ -80,6 +79,20 @@ class UserController extends Controller
 
     public function logoutUser(){
         Auth::logout();
+        return redirect()->route('home');
+    }
+
+    public function editUser(){
+        return view('users.edit');
+    }
+
+    public function editUserStore(Request $request){
+        $this->validate($request, [
+            'name' => 'max:50',
+        ]);
+        $user = Auth::user();
+        $user->name = $request->get('name');
+        $user->update();
         return redirect()->route('home');
     }
 

@@ -15,20 +15,35 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/login', [
-    'uses' => 'UserController@loginUser',
-    'as' => 'login'
-]);
+Route::group(['prefix' => 'user'], function () {
+    Route::get('login', [
+        'uses' => 'UserController@loginUser',
+        'as' => 'login'
+    ]);
 
-Route::post('/login/user', [
-    'uses' => 'UserController@loginUserCheck',
-    'as' => 'login.check'
-]);
+    Route::post('login', [
+        'uses' => 'UserController@loginUserCheck',
+        'as' => 'login.check'
+    ]);
 
-Route::get('/logout', [
-    'uses' => 'UserController@logoutUser',
-    'as' => 'logout'
-]);
+    Route::get('logout', [
+        'uses' => 'UserController@logoutUser',
+        'as' => 'logout'
+    ]);
+
+    Route::get('edit', [
+        'uses' => 'UserController@editUser',
+        'as' => 'user.edit',
+        'middleware' => 'auth'
+    ]);
+
+    Route::post('edit', [
+        'uses' => 'UserController@editUserStore',
+        'as' => 'user.edit',
+        'middleware' => 'auth'
+    ]);
+});
+
 
 Route::group(['prefix' => 'register'], function () {
     Route::get('', [
