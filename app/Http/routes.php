@@ -15,21 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::get('/register', [
-   'uses' => 'UserController@registerUser',
-    'as' => 'register'
-]);
-
-Route::post('/register/user', [
-    'uses' => 'UserController@registerUserStore',
-    'as' => 'register.user'
-]);
-
-Route::get('/register/activate', [
-    'uses' => 'UserController@activateUser',
-    'as' => 'user.activation'
-]);
-
 Route::get('/login', [
     'uses' => 'UserController@loginUser',
     'as' => 'login'
@@ -44,3 +29,43 @@ Route::get('/logout', [
     'uses' => 'UserController@logoutUser',
     'as' => 'logout'
 ]);
+
+Route::group(['prefix' => 'register'], function () {
+    Route::get('', [
+        'uses' => 'UserController@registerUser',
+        'as' => 'register'
+    ]);
+
+    Route::post('user', [
+        'uses' => 'UserController@registerUserStore',
+        'as' => 'register.user'
+    ]);
+
+    Route::get('activate/{email?}/{code?}', [
+        'uses' => 'UserController@activateUser',
+        'as' => 'user.activation'
+    ]);
+});
+
+
+Route::group(['prefix' => 'password'], function () {
+    Route::get('reset/{email}/{code}', [
+        'uses' => 'UserController@resetPassword',
+        'as' => 'reset.password'
+    ]);
+
+    Route::get('reset', [
+        'uses' => 'UserController@resetPasswordForm',
+        'as' => 'reset.password'
+    ]);
+
+    Route::post('reset', [
+        'uses' => 'UserController@resetPasswordEmailing',
+        'as' => 'reset.password'
+    ]);
+
+    Route::post('store', [
+        'uses' => 'UserController@resetNewPasswordStore',
+        'as' => 'new.password'
+    ]);
+});

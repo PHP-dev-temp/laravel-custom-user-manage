@@ -6,11 +6,11 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        User registration
+                        {{ $header }}
                     </div>
 
                     <div class="panel-body">
-                        Thanks for register your account.
+                        {{ $body }}
                     </div>
                 </div>
             </div>
