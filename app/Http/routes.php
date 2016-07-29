@@ -24,3 +24,23 @@ Route::post('/register/user', [
     'uses' => 'UserController@registerUserStore',
     'as' => 'register.user'
 ]);
+
+Route::get('/register/activate', [
+    'uses' => 'UserController@activateUser',
+    'as' => 'user.activation'
+]);
+
+Route::get('/login', [
+    'uses' => 'UserController@loginUser',
+    'as' => 'login'
+]);
+
+Route::post('/login/user', [
+    'uses' => 'UserController@loginUserCheck',
+    'as' => 'login.check'
+]);
+
+Route::get('/logout', [
+    'uses' => 'UserController@logoutUser',
+    'as' => 'logout'
+]);

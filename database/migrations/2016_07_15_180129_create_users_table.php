@@ -22,7 +22,6 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('active')->default(0);
             $table->string('active_hash', 255)->nullable();
             $table->string('recover_hash', 255)->nullable();
-            $table->string('remember_identifier', 255)->nullable();
             $table->string('remember_token', 255)->nullable();
 
         });

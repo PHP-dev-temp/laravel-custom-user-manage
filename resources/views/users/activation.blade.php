@@ -6,11 +6,11 @@
             <div class="col-md-10 col-md-offset-1">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Welcome
+                        User registration
                     </div>
 
                     <div class="panel-body">
-                        Your Application's Landing Page.
+                        Thanks for register your account.
                     </div>
                 </div>
             </div>
